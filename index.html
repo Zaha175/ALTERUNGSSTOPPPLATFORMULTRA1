@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JUNGSINGULÄR – Bewusst gesund und jung bleiben</title>
+    <meta name="description"
+        content="Plattform für Informationen über Alterungsprozesse und mögliche Gegenmaßnahmen.">
+    <meta name="keywords" content="Alterung, Alterungsprozesse, Langlebigkeit, Anti-Aging, Gesundheit">
+    <meta name="robots" content="index, follow">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+          /* Allgemeine Stile */
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            color: #333;
+            transition: background-color 0.3s, color 0.3s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://cdn.gamma.app/fhpleqvbjim2f32/generated-images/m5jbKxn54d6Q01a4tMJgN.jpg');
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+            opacity: 1;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        body.dark-mode {
+            background-color: #121212;
+            color: #e0e0e0;
+        }
+
+        body.dark-mode::before {
+            opacity: 0.3;
+        }
+
+        /* Container für die gesamte Seite */
+        .container {
+            width: 90%;
+            max-width: 1400px;
+            margin: 0 auto;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background-color: #003366;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            font-size: 1.5rem;
+            transition: background-color 0.3s;
+        }
+
+        body.dark-mode header {
+            background-color: #1a1a1a;
+        }
+
+        main {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding: 20px;
+            flex-grow: 1;
+        }
+
+        /* Zentrierte Karten mit Hover-Effekten */
+        .menu-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .menu-item {
+            padding: 20px;
+            background-color: #003366;
+            color: white;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: transform 0.2s ease, background-color 0.3s ease;
+            width: calc(33.33% - 20px/3*2);
+            box-sizing: border-box;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .menu-item:hover {
+            background-color: #0055a5;
+            transform: scale(1.05);
+        }
+
+        /* Media Queries für kleinere Bildschirme */
+        @media (max-width: 768px) {
+            .menu-item {
+                width: calc(50% - 20px/2*1);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .menu-item {
+                width: 100%;
+            }
+        }
+
+        /* Inhaltscontainer */
+        .content-container {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        .description {
+            background-color: #ffffcc;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            display: none;
+            width: 100%;
+            max-width: 800px;
+            box-sizing: border-box;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+        }
+
+        body.dark-mode .description {
+            background: #1e1e1e;
+            border-color: #444;
+            color: #e0e0e0;
+        }
+
+        .description.active {
+            display: block;
+        }
+
+        /* Dark-Mode-Toggle */
+        .dark-mode-toggle {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background-color: #343a40;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-transform: uppercase;
+        }
+
+        body.dark-mode .dark-mode-toggle {
+            background-color: #1a1a1a;
+        }
+
+        .dark-mode-toggle:hover {
+            background-color: #23272b;
+            color: #FFD700;
+            transform: scale(1.1);
+        }
+
+        /* Buttons */
+        .button {
+            width: 80%;
+            max-width: 400px;
+            padding: 20px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border: none;
+            background-color: #003366;
+            color: white;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            text-align: center;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin: 10px auto;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .button:hover {
+            background-color: #0055a5;
+            transform: scale(1.1);
+        }
+
+        .button i {
+            font-size: 1rem;
+        }
+
+        /* Iframes */
+        iframe {
+            width: 100%;
+            height: 400px;
+            max-width: 800px;
+            margin-bottom: 20px;
+            border: none;
+            overflow: hidden;
+        }
+
+        /* Chatbot Widget */
+        #chatbot-widget {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 9999;
+        }
+
+        #chatbot-toggle {
+            background-color: #003366;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            font-size: 14px;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        #chatbot-toggle:hover {
+            background-color: #002244;
+            transform: scale(1.1);
+        }
+
+        #chatbot-container {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 350px;
+            height: 500px;
+            position: fixed;
+            bottom: 70px;
+            right: 20px;
+            z-index: 9999;
+            overflow: hidden;
+        }
+
+        #chatbot-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 10px;
+        }
+
+        #chat-response {
+            width: 100%;
+            height: 300px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+            background: #fff;
+            color: #333;
+        }
+
+        #chat-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        #send-btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #003366;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #send-btn:hover {
+            background-color: #002244;
+        }
+
+        /* Modal-Fenster */
+        .modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 800px;
+            background-color: #ffffe0;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            display: none;
+            padding: 20px;
+            overflow-y: auto;
+            max-height: 80vh;
+        }
+
+        body.dark-mode .modal {
+            background-color: #301934;
+        }
+
+        .modal.active {
+            display: block;
+        }
+
+        /* Hintergrund-Overlay für Modals */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            display: none;
+        }
+
+        .modal-overlay.active {
+            display: block;
+        }
+
+        .supplement-info img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 10px;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 5px 10px;
+            background-color: #003366;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .modal-close:hover {
+            background-color: #002244;
+        }
+
+       .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Seitenverhältnis */
+            padding-top: 30px;
+            height: 0;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+
+        .video-container iframe,  
+        .video-container object,  
+        .video-container embed {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        /* Media Queries */
+        @media (max-width: 768px) {
+            main {
+                flex-direction: column;
+            }
+
+            .menu-container {
+                width: 100%;
+            }
+
+            .content-container {
+                padding: 10px;
+                align-items: stretch;
+            }
+
+            .description {
+                width: 100%;
+            }
+
+            .button-container {
+                max-width: 100%;
+            }
+
+            iframe {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>ALTERUNGSSTOPP PLATTFORM ULTRA</header>
+    <button class="dark-mode-toggle" onclick="toggleDarkMode()">Dark Mode</button>
+
+    <div id="chatbot-widget">
+        <button id="chatbot-toggle">🤖 Chatbot starten</button>
+        <div id="chatbot-container">
+            <div id="chat-response">Willkommen beim Chatbot!</div>
+            <input type="text" id="chat-input" placeholder="Schreibe eine Nachricht...">
+            <button id="send-btn">Senden</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <main>
+            <div class="menu-container">
+                 <div class="menu-item" onclick="openModal('header')">WILLKOMMEN</div>
+                <div class="menu-item" onclick="openModal('ablauf')">ABLAUF DER VORBEREITUNG</div>
+                <div class="menu-item" onclick="openModal('leistungstests')">REAKTIONSTESTS</div>
+                <div class="menu-item" onclick="openModal('mpu-qa')">ALTERUNGSSTOPP-APP: FRAGEN UND ANTWORTEN</div>
+                <div class="menu-item" onclick="openModal('promille-rechner')">ALTERUNGSSTOPP RECHNER</div>
+                <div class="menu-item" onclick="openModal('mpu-quiz')">QUIZZE UND SPIELE</div>
+                <div class="menu-item" onclick="openModal('gutachtersimulator')">ALTERUNGSSTOPP SIMULATOR</div>
+                <div class="menu-item" onclick="openModal('checkliste')">ALTERUNGSSTOPP CHECKLISTE</div>
+                <div class="menu-item" onclick="openModal('frageboegen')">ALTERUNGSSTOPP „KI und die Zukunft der
+                    Menschheit."</div>
+                <div class="menu-item" onclick="openModal('atemuebungen')">ATEMÜBUNGEN</div>
+                <div class="menu-item" onclick="openModal('ki-assistent')">ALTERUNGSSTOPP KI BERATER</div>
+            </div>
+
+            <!-- Modal-Fenster -->
+            <div class="modal-overlay"></div>
+            <div class="modal">
+                <button class="modal-close" onclick="closeModal()">×</button>
+                <div class="modal-content">
+                    <!-- Inhalt wird hier dynamisch eingefügt -->
+                </div>
+            </div>
+
+            <!-- Content-Container (versteckt) -->
+            <div class="content-container" style="display: none;">
+                <div class="description" id="ablauf-description">
+                    <h3>JUNGSINGULÄR ABLAUF DER VORBEREITUNG</h3>
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/YPrF_JwF7kU?si=AKjYq_6RPOC2e3FY"
+                        title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <ul>
+                        <p>JUNGSINGULÄR APP - ALTERUNGSSTOPP APP</p>
+                        <p><button class="button"
+                                onclick="window.open('https://zaha175.github.io/VIVAVITALAPP/', '_blank')">JUNGSINGULÄR
+                                APP - ALTERUNGSSTOPP APP<i class="fas fa-external-link-alt"></i></button>
+                        </p>
+                        <iframe src="https://zaha175.github.io/VIVAVITALAPP/"></iframe>
+                    </ul>
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/YPrF_JwF7kU?si=AKjYq_6RPOC2e3FY"
+                        title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <button class="button"
+                        onclick="window.open('https://chatgpt.com/g/g-677af416fb60819181c3a699f2915aa2-alterungsstopp-berater', '_blank')">ALTERUNGSSTOPP
+                        KI Berater <i class="fas fa-external-link-alt"></i></button>
+                </div>
+                    <div class="description" id="leistungstests-description">
+                    <h3>JUNGSINGULÄR REAKTIONSTESTS</h3>
+                    <p>Hier findest du alle Leistungstests wie Reaktionstests und Konzentrationsübungen.</p>
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/YPrF_JwF7kU?si=AKjYq_6RPOC2e3FY"
+                        title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <ul>
+                        <p><button class="button"
+                                onclick="window.open('https://gamma.app/docs/MPUNEUREAKTIONSTEST-79vwbbrski77oor', '_blank')">REAKTIONSTESTS
+                                AUFRUFEN <i class="fas fa-external-link-alt"></i></button></p>
+                       <p>REAKTIONSTESTS:</p>
+                        <p>FIGURENVERGLEICHSTEST</p>
+                        <p><button class="button" onclick="window.open('https://zaha175.github.io/FIGURENVERGLEICHSTEST/', '_blank')">FIGURENVERGLEICHSTEST1 <i class="fas fa-external-link-alt"></i></button></p>
+                        <p><button class="button" onclick="window.open('https://zaha175.github.io/FIGURENVERGLEICHSTEST1/', '_blank')">FIGURENVERGLEICHSTEST2 <i class="fas fa-external-link-alt"></i></button></p>
+                        <p><button class="button" onclick="window.open('https://zaha175.github.io/FIGURENVERGLEICHSTEST2/', '_blank')">FIGURENVERGLEICHSTEST3<i class="fas fa-external-link-alt"></i></button></p>
+                        <p>FARBENTEST</p>
+                        <p><button class="button" onclick="window.open('https://zaha175.github.io/FARBENTEST1/', '_blank')">FARBENTEST1 <i class="fas fa-external-link-alt"></i></button></p>
+                        <p><button class="button" onclick="window.open('https://zaha175.github.io/FARBENTEST2/', '_blank')">FARBENTEST2 <i class="fas fa-external-link-alt"></i></button></p>
+                        <p><button class="button" onclick="window.open('https://zaha175.github.io/FARBENTEST3/', '_blank')">FARBENTEST3 <i class="fas fa-external-link-alt"></i></button></p>
+                        <p>VERKEHRSITUATIONSTEST</p>
+                        <p><button class="button" onclick="window.open('https://zaha175.github.io/Verkehrssituationstext/', '_blank')">VERKEHRSITUATIONSTEST <i class="fas fa-external-link-alt"></i></button></p>
+                        <p>MERHFACHSITUATIONSTESTS</p>
+                        <p><button class="button" onclick="window.open('https://zaha175.github.io/MERHFACHSITUATIONSTEST/', '_blank')">MERHFACHSITUATIONSTEST1 <i class="fas fa-external-link-alt"></i></button></p>
+                        <p><button class="button" onclick="window.open('https://zaha175.github.io/MEHRFACHSITUATIONSTEST1/', '_blank')">MERHFACHSITUATIONSTEST2 <i class="fas fa-external-link-alt"></i></button></p>
+                        <p><button class="button" onclick="window.open('https://zaha175.github.io/MEHRFACHSITUATIONSTEST2/', '_blank')">MERHFACHSITUATIONSTEST3 <i class="fas fa-external-link-alt"></i></button></p>
+                    </ul>
+                </div>
+                <div class="description" id="mpu-qa-description">
+                    <h3>JUNGSINGULÄR ALTERUNGSSTOPP-APP: FRAGEN UND ANTWORTEN</h3>
+                    <p>Fragen und Antworten zur Vorbereitung.</p>
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/YPrF_JwF7kU?si=AKjYq_6RPOC2e3FY"
+                        title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <div class="audio-container">
+                        <h3>Podcast für Vorbereitung anhören!</h3>
+                        <audio controls>
+                            <source src="Zellalterung.mp3" type="audio/mpeg">
+                            Dein Browser unterstützt die Audiowiedergabe nicht.
+                        </audio>
+                    </div>
+                    <h3>JUNGSINGULÄR FRAGEN UND ANTWORTEN</h3>
+                    <ul>
+                        <p>JUNGSINGULÄR FRAGEN UND ANTWORTEN APP
+                        <p><button class="button"
+                                onclick="window.open('https://zaha175.github.io/ALTERUNGSSTOPPAPP/', '_blank')">JUNGSINGULÄR
+                                FRAGEN UND ANTWORTEN APP <i class="fas fa-external-link-alt"></i></button>
+                        <p>
+                            <iframe src="https://zaha175.github.io/ALTERUNGSSTOPPAPP/"></iframe>
+                    </ul>
+                    <h3>WISSEN</h3>
+                    <ul>
+                        <p><button class="button"
+                                onclick="window.open('https://zaha175.github.io/ALTERWISSENSPLATFORM/', '_blank')">WISSENSPLATFORM
+                                <i class="fas fa-external-link-alt"></i></button>
+                        <p>
+                            <iframe src="https://zaha175.github.io/ALTERWISSENSPLATFORM/"></iframe>
+                    </ul>
+                </div>
+                <div class="description" id="promille-rechner-description">
+                    <h3>JUNGSINGULÄR ALTERUNGSSTOPP RECHNER</h3>
+                    <ul>
+                        <p>JUNGSINGULÄR LEBENSALTER-RECHNER</p>
+                        <p><button class="button"
+                                onclick="window.open('https://zaha175.github.io/LEBENSALTER-RECHNER/', '_blank')">LEBENSALTER-RECHNER
+                                mit Diagramm <i class="fas fa-external-link-alt"></i></button>
+                        <p>
+                            <iframe src="https://zaha175.github.io/LEBENSALTER-RECHNER/"></iframe>
+                            <p>JUNGSINGULÄR ALKOHOLKONSUMRECHNER MIT DIAGRAMM</p>
+                            <p><button class="button"
+                                    onclick="window.open('https://zaha175.github.io/MENGENACHPROMILLE/', '_blank')">ALKOHOLKONSUMRECHNER
+                                    MIT DIAGRAMM<i class="fas fa-external-link-alt"></i></button>
+                            <p>
+                                <iframe src="https://zaha175.github.io/MENGENACHPROMILLE/"></iframe>
+                                <p>JUNGSINGULÄR PROMILLERECHNER MIT DIAGRAMM</p>
+                                <p><button class="button"
+                                        onclick="window.open('https://zaha175.github.io/PROMILLERECHNERDE/', '_blank')">Promillerechner
+                                        mit Diagramm <i class="fas fa-external-link-alt"></i></button>
+                                <p>
+                                    <iframe src="https://zaha175.github.io/PROMILLERECHNERDE/"></iframe>
+                    </ul>
+                </div>
+                <div class="description" id="mpu-quiz-description">
+                    <h3>JUNGSINGULÄR ALTERUNGSSTOPP Quiz und Spiele</h3>
+                    <ul>
+                        <p>JUNGSINGULÄR ALTERUNGSSTOPP QUIZZE
+                        <p>
+                        <p>QUIZ1</p>
+                        <p><button class="button"
+                                onclick="window.open('https://zaha175.github.io/QUIZ1STOPP/', '_blank')">QUIZ1 STARTEN <i
+                                    class="fas fa-external-link-alt"></i></button>
+                            <p>
+                            <iframe src="https://zaha175.github.io/QUIZ1STOPP/"></iframe>
+                            <p>
+                            </ul>
+                    <p>JUNGSINGULÄR ALTERUNGSSTOPP SPIELE
+                    <p>SPIEL1</p>
+                    <p><button class="button"
+                            onclick="window.open('https://zaha175.github.io/SPIEL1STOPPDE/', '_blank')">SPIEL1 STARTEN <i
+                                class="fas fa-external-link-alt"></i></button>
+                        <p>
+                        <iframe src="https://zaha175.github.io/SPIEL1STOPPDE/"></iframe>
+                        <p>
+                    <p>
+                    </ul>
+                </div>
+                <div class="description" id="gutachtersimulator-description">
+                    <h3>JUNGSINGULÄR ALTERUNGSSTOPP SIMULATOR</h3>
+                    <p>Simulation eines JUNGSINGULÄR ALTERUNGSSTOPP-Gesprächs.</p>
+                    <button class="button"
+                        onclick="window.open('https://chatgpt.com/g/g-677af416fb60819181c3a699f2915aa2-alterungsstopp-berater', '_blank')">ALTERUNGSSTOPP
+                        KI-SIMULATOR ÖFFNEN <i class="fas fa-external-link-alt"></i></button>
+                    <p>Der KI-Berater ist bereit, dir bei allen ALTERUNGSSTOPP Fragen zu helfen.</p>
+                    <button class="button"
+                        onclick="window.open('https://chatgpt.com/g/g-677af416fb60819181c3a699f2915aa2-alterungsstopp-berater', '_blank')">ALTERUNGSSTOPP
+                        KI-BERATER ÖFFNEN <i class="fas fa-external-link-alt"></i></button>
+                </div>
+                <div class="description" id="checkliste-description">
+                    <h3>JUNGSINGULÄR ALTERUNGSSTOPP - Checkliste</h3>
+                    <p>Schritt für Schritt zur erfolgreichen Zukunft: Nutzen Sie unsere Checkliste, um den Überblick zu
+                        behalten und sich optimal vorzubereiten.</p>
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/YPrF_JwF7kU?si=AKjYq_6RPOC2e3FY"
+                        title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <ul>
+                        <h3>JUNGSINGULÄRCHECKLISTE ALTERUNGSSTOPP </h3>
+                        <p>JUNGSINGULÄRCHECKLISTE</p>
+                        <button class="button"
+                            onclick="window.open('https://zaha175.github.io/JUNGSOLITARCHECKLISTE/', '_blank')">JUNGSINGULÄRCHECKLISTE
+                            ÖFFNEN <i class="fas fa-external-link-alt"></i></button>
+                        <p>
+                        <iframe src="https://zaha175.github.io/JUNGSOLITARCHECKLISTE/"></iframe>
+                        <p>
+                        <h3>CHECKLISTEALTERSFORMEL ALTERUNGSSTOPP</h3>
+                        <p>CHECKLISTEALTERSFORMEL</p>
+                        <button class="button"
+                            onclick="window.open('https://zaha175.github.io/CHECKLISTEALTERSFORMEL/', '_blank')">CHECKLISTEALTERSFORMEL
+                            ÖFFNEN <i class="fas fa-external-link-alt"></i></button>
+                        <p>
+                        <iframe src="https://zaha175.github.io/CHECKLISTEALTERSFORMEL/"></iframe>
+                        <ul>
+                            <h3>JUNGSINGULÄR ALTERUNGSSTOPP KI-Berater</h3>
+                            <p>Der ALTERUNGSSTOPP KI-Berater ist bereit, dir bei allen ALTERUNGSSTOPP-Fragen zu helfen.
+                            </p>
+                            <button class="button"
+                                onclick="window.open('https://chatgpt.com/g/g-677af416fb60819181c3a699f2915aa2-alterungsstopp-berater', '_blank')">ALTERUNGSSTOPP
+                                KI-Berater ÖFFNEN <i class="fas fa-external-link-alt"></i></button>
+                </div>
+                <div class="description" id="frageboegen-description">
+                    <h3>JUNGSINGULÄR ALTERUNGSSTOPP, KI und die Zukunft der Menschheit: Was du wissen musst:
+                        KILEITFADEN</h3>
+                    <p>Übungen und Frage                    <p>Übungen und Fragebögen für die Vorbereitung</p>
+                    <button class="button"
+                        onclick="window.open('https://gamma.app/docs/KILeitfaden-2ufgdivxc7n49d0', '_blank')">KILEITFADEN
+                        ANZEIGEN <i class="fas fa-external-link-alt"></i></button>
+                    <p>
+                    <button class="button"
+                        onclick="window.open('https://zaha175.github.io/KICHATBOT/', '_blank')">KICHATBOT ÖFFNEN <i
+                            class="fas fa-external-link-alt"></i></button>
+                    <iframe src="https://zaha175.github.io/KICHATBOT/" width="100%" height="600"
+                        frameborder="0"></iframe>
+                    <p>
+                          <img src="https://cdn.gamma.app/fhpleqvbjim2f32/abb0bf3a4e7f4f0e89f38b0c458eb992/original/th-7.jpeg"
+                            alt="Jeder Tag ist ein Kampf!" style="width: 100%; height: auto;">
+                    <p>
+                </div>
+                <div class="description" id="atemuebungen-description">
+                    <h3>ATEMÜBUNGEN – Entspannung und Fokus</h3>
+                    <p><strong>Entspannung und Fokus</strong></p>
+                    <ul>
+                        <li>Entdecke effektive Atemtechniken, um Stress abzubauen, deinen Fokus zu schärfen und dich auf
+                            den kritischen Moment vorzubereiten.</li>
+                    </ul>
+                    <iframe src="https://zaha175.github.io/ATEMUBUNGEN/" width="100%" height="600"
+                        frameborder="0"></iframe>
+                    <button class="button"
+                        onclick="window.open('https://zaha175.github.io/ATEMUBUNGEN/', '_blank')">ATEMÜBUNGEN ÖFFNEN <i
+                            class="fas fa-external-link-alt"></i></button>
+                </div>
+                <div class="description" id="ki-assistent-description">
+                    <h3>JUNGSINGULÄR ALTERUNGSSTOPP KI BERATER</h3>
+                    <p>Der KI-Berater ist bereit, dir bei allen ALTERUNGSSTOPP Fragen zu helfen.</p>
+                    <button class="button"
+                        onclick="window.open('https://chatgpt.com/g/g-677af416fb60819181c3a699f2915aa2-alterungsstopp-berater', '_blank')">ALTERUNGSSTOPP
+                        KI-BERATER ÖFFNEN <i class="fas fa-external-link-alt"></i></button>
+                    <p>
+                        <img src="https://cdn.gamma.app/fhpleqvbjim2f32/generated-images/zgH0CSi2wvTWUDv7JSSOF.jpg"
+                            alt="Jeder Tag ist ein Kampf!" style="width: 100%; height: auto;">
+                    <p>
+                </div>
+                <div class="description" id="header-description">
+                    <h3>Willkommen auf der JUNGSINGULÄR-Plattform</h3>
+                    <p>Entdecken Sie die Geheimnisse eines langen und gesunden Lebens. Erfahren Sie mehr über die Säulen der Langlebigkeit und wie Sie diese durch Ernährung, Bewegung, Schlaf, Stressmanagement
+                        und soziale Interaktionen positiv beeinflussen können. Starten Sie mit personalisierten Tipps in ein gesünderes Leben.</p>
+             <iframe width="560" height="315" src="https://www.youtube.com/embed/t2u1C2llfEk?si=mQ68swSe4a4VdsoM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+             <button class="button" onclick="showDescription('lebensstil')">Mehr erfahren</button>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script>
+        function openModal(category) {
+            const modal = document.querySelector('.modal');
+            const modalContent = document.querySelector('.modal-content');
+            const description = document.getElementById(`${category}-description`);
+
+            if (description) {
+                modalContent.innerHTML = description.innerHTML;
+            }
+
+            modal.classList.add('active');
+            document.querySelector('.modal-overlay').classList.add('active');
+        }
+
+        function closeModal() {
+            document.querySelector('.modal').classList.remove('active');
+            document.querySelector('.modal-overlay').classList.remove('active');
+        }
+
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+        }
+
+        // Lade Dark-Mode und initialisiere Chatbot beim Start
+        window.onload = () => {
+            if (localStorage.getItem('darkMode') === 'true') {
+                document.body.classList.add('dark-mode');
+            }
+
+            document.getElementById('chatbot-toggle').onclick = () => {
+                const container = document.getElementById('chatbot-container');
+                container.style.display = container.style.display === 'none' ? 'flex' : 'none';
+                document.getElementById('chat-response').innerText = 'Der Chatbot ist derzeit nicht verfügbar. Bitte versuchen Sie es später erneut.';
+            };
+
+            // Chatbot deaktiviert – Platzhalterantwort
+            document.getElementById('send-btn').onclick = () => {
+                document.getElementById('chat-response').innerText = 'Der Chatbot ist derzeit nicht verfügbar. Bitte versuchen Sie es später erneut.';
+            }
+        };
+    </script>
+</body>
+
+</html>
