@@ -14,7 +14,7 @@
         integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
-          /* Allgemeine Stile */
+           /* Allgemeine Stile */
         body {
             font-family: 'Roboto', sans-serif;
             margin: 0;
@@ -60,13 +60,17 @@
             flex-direction: column;
         }
 
-        header {
+       header {
             background-color: #003366;
-            color: #fff;
+            color: #ffd700; /* Gelb */
             padding: 20px;
             text-align: center;
             font-size: 1.5rem;
-            transition: background-color 0.3s;
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+            transition: background-color 0.3s, color 0.3s;
         }
 
         body.dark-mode header {
@@ -89,23 +93,25 @@
             gap: 20px;
         }
 
-        .menu-item {
-            padding: 20px;
-            background-color: #003366;
-            color: white;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 1.2rem;
-            font-weight: bold;
-            transition: transform 0.2s ease, background-color 0.3s ease;
-            width: calc(33.33% - 20px/3*2);
-            box-sizing: border-box;
-            text-align: center;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+      .menu-item {
+    padding: 10px;
+    background-color: #003366;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5);
+    transition: transform 0.2s ease, background-color 0.3s ease;
+    width: calc(25% - 10px);
+    box-sizing: border-box;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 
         .menu-item:hover {
             background-color: #0055a5;
@@ -183,26 +189,26 @@
             transform: scale(1.1);
         }
 
-        /* Buttons */
-        .button {
-            width: 80%;
-            max-width: 400px;
-            padding: 20px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            border: none;
-            background-color: #003366;
-            color: white;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            text-align: center;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            margin: 10px auto;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
+       .button {
+    width: 70%;
+    max-width: 300px;
+    padding: 10px 15px;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    background-color: #003366;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
 
         .button:hover {
             background-color: #0055a5;
@@ -392,6 +398,40 @@
             width: 100%;
             height: 100%;
         }
+
+        /* Module für STRESUL und ARBORUL MPU */
+        .module {
+            background-color: rgba(0, 0, 50, 0.8);
+            padding: 10px 20px;
+            margin: 10px;
+            border-radius: 5px;
+            text-align: center;
+            color: #FFD700; /* Dunkelgelbe Schrift */
+           display: flex; /* Flexbox für Zentrierung */
+            justify-content: center; /* Horizontal zentrieren */
+            align-items: center; /* Vertikal zentrieren */
+            cursor: pointer;
+            transition: transform 0.2s;
+           width: 200px; /* Optional: Feste Breite */
+           height: 60px; /* Macht die Buttons länger */
+    }
+
+        .module:hover {
+            transform: scale(1.1);
+        }
+
+        .module-bottom-left {
+            position: fixed;
+            bottom: 50px;
+            left: 20px;
+        }
+
+        .module-bottom-right {
+            position: fixed;
+            bottom: 50px;
+            right: 20px;
+        }
+
         /* Media Queries */
         @media (max-width: 768px) {
             main {
@@ -452,8 +492,11 @@
                 <div class="menu-item" onclick="openModal('atemuebungen')">ATEMÜBUNGEN</div>
                 <div class="menu-item" onclick="openModal('ki-assistent')">ALTERUNGSSTOPP KI BERATER</div>
             </div>
-
-            <!-- Modal-Fenster -->
+               <!-- Module für STRESUL und ARBORUL MPU -->
+            <div class="module module-bottom-left" onclick="openModal('stresul')">STRES</div>
+            <div class="module module-bottom-right" onclick="openModal('arborul-mpu')">ENTSCHEIDUNGSBAUM</div>
+    
+        <!-- Modal-Fenster -->
             <div class="modal-overlay"></div>
             <div class="modal">
                 <button class="modal-close" onclick="closeModal()">×</button>
@@ -461,7 +504,23 @@
                     <!-- Inhalt wird hier dynamisch eingefügt -->
                 </div>
             </div>
-
+              <div class="content-container">
+                <div class="description" id="stresul-description">
+                    <h3>Modul STRES</h3>
+                    <p>Hier kommt der Inhalt für das Modul STRES...</p>
+                         </a>
+              <a href="https://chatgpt.com/g/g-677af416fb60819181c3a699f2915aa2-alterungsstopp-berater" target="_blank">
+              <img src="https://cdn.gamma.app/fhpleqvbjim2f32/generated-images/Bx81A5Ct9oOUsc7eE0UWu.jpg" alt="Alternativtext" style="width: 200px; height: auto;">
+               </a>
+             </div>
+                <div class="description" id="arborul-mpu-description">
+                    <h3>Modul ENTSCHEIDUNGSBAUM</h3>
+                    <p>Hier kommt der Inhalt für das Modul ARBORUL MPU...</p>
+                  </a>
+              <a href="https://chatgpt.com/g/g-677af416fb60819181c3a699f2915aa2-alterungsstopp-berater" target="_blank">
+              <img src="https://cdn.gamma.app/fhpleqvbjim2f32/generated-images/Bx81A5Ct9oOUsc7eE0UWu.jpg" alt="Alternativtext" style="width: 200px; height: auto;">
+               </a>
+               </div>
             <!-- Content-Container (versteckt) -->
             <div class="content-container" style="display: none;">
                 <div class="description" id="ablauf-description">
